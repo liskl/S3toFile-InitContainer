@@ -5,10 +5,10 @@ set -euo pipefail;
 echo "Downloading \"s3://${S3_BUCKET}/${ENVIRONMENT}/version.txt\" to \"${LOCAL_DEST}\""
 /usr/bin/aws s3 cp "s3://${S3_BUCKET}/${ENVIRONMENT}/version.txt" "${LOCAL_DEST}" ;
 
-TIMESTAMP="$(cat "${LOCAL_DEST}/version.txt")"
+VERSION="$(cat "${LOCAL_DEST}/version.txt")"
 
-echo "Downloading \"s3://${S3_BUCKET}/${ENVIRONMENT}/\*-${TIMESTAMP}.sql.gz" to \"${LOCAL_DEST}\""
-/usr/bin/aws s3 sync "s3://${S3_BUCKET}/${ENVIRONMENT}/" "${LOCAL_DEST}" --exclude "*" --include "*-${TIMESTAMP}.sql.gz";
+echo "Downloading \"s3://${S3_BUCKET}/${ENVIRONMENT}/\*-${VERSION}.sql.gz" to \"${LOCAL_DEST}\""
+/usr/bin/aws s3 sync "s3://${S3_BUCKET}/${ENVIRONMENT}/" "${LOCAL_DEST}" --exclude "*" --include "*-${VERSION}.sql.gz";
 
 rm -rf "${LOCAL_DEST}/version.txt";
 
