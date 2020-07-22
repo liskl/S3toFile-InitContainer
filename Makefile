@@ -42,10 +42,11 @@ build_image: testnumb
 	docker tag "${FULL_IMAGE}" "${IMAGE_NAME}:${GIT_BRANCH}";
 	docker tag "${FULL_IMAGE}" "${IMAGE_NAME}:${GIT_BRANCH}-g${GIT_VERSION}";
 
-	docker push "${FULL_IMAGE}";
+
 	docker push "${IMAGE_NAME}:${GIT_BRANCH}";
 	docker push "${IMAGE_NAME}:${GIT_BRANCH}-g${GIT_VERSION}";
 	docker push "${IMAGE_NAME}:latest";
+	docker push "${FULL_IMAGE}";
 
 test: build_image
 	echo "testing image: "${FULL_IMAGE}" for pulling db's from ${S3_BUCKET}."
