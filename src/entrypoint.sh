@@ -10,10 +10,13 @@ echo "Downloading \"s3://${S3_BUCKET}/${ENVIRONMENT}/version.txt\" to \"${LOCAL_
 
 VERSION="$( cat ${LOCAL_DEST}/version.txt )" ;
 
-echo "Downloading \"s3://${S3_BUCKET}/${ENVIRONMENT}/*-${VERSION}.sql.gz\" to \"${LOCAL_DEST}\"" ;
+echo "Downloading s3://${S3_BUCKET}/${ENVIRONMENT}/*-${VERSION}.sql.gz to ${LOCAL_DEST}" ;
 /usr/bin/aws s3 sync "s3://${S3_BUCKET}/${ENVIRONMENT}/" "${LOCAL_DEST}" --exclude "*" --include "*-${VERSION}.sql.gz";
 
 rm -rf "${LOCAL_DEST}/version.txt";
+
+for i in ${LOCAL_DEST}/*-data-${VERSION}.sql.gz; do mv "$i" "${i/*-data-/-01-data-}"; done
+for i in ${LOCAL_DEST}/*-schema-${VERSION}.sql.gz; do mv "$i" "${i/*-schema-/-00-schema-}"; done
 
 chown -R 1001:1001 "${LOCAL_DEST}" ;
 
