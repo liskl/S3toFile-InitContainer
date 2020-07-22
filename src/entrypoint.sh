@@ -17,8 +17,8 @@ rm -rf "${LOCAL_DEST}/version.txt";
 
 set -x ;
 
-for i in ${LOCAL_DEST}/*-data-${VERSION}.sql.gz; do mv -- "$i" "${i/*-data-/-01-data-}"; done
-for i in ${LOCAL_DEST}/*-schema-${VERSION}.sql.gz; do mv -- "$i" "${i/*-schema-/-00-schema-}"; done
+for i in ${LOCAL_DEST}/*-data-${VERSION}.sql.gz; do mv -- "$i" "${i/-data-/-01-data-}"; done
+for i in ${LOCAL_DEST}/*-schema-${VERSION}.sql.gz; do mv -- "$i" "${i/-schema-/-00-schema-}"; done
 
 set +x ;
 
