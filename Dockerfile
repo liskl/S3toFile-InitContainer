@@ -10,7 +10,7 @@ ADD src/alpine-minirootfs-3.12.0-x86_64.tar.gz /
 ENV ENVIRONMENT "dev"
 ENV LOCAL_DEST "/destination"
 
-RUN apk update && apk add --no-cache aws-cli
+RUN apk update && apk add --no-cache bash aws-cli
 RUN mkdir -p ${LOCAL_DEST}
 
 VOLUME ${LOCAL_DEST}
