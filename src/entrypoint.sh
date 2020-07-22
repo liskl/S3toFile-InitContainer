@@ -15,8 +15,12 @@ echo "Downloading s3://${S3_BUCKET}/${ENVIRONMENT}/*-${VERSION}.sql.gz to ${LOCA
 
 rm -rf "${LOCAL_DEST}/version.txt";
 
-for i in ${LOCAL_DEST}/*-data-${VERSION}.sql.gz; do mv -v "$i" "${i/*-data-/-01-data-}"; done
-for i in ${LOCAL_DEST}/*-schema-${VERSION}.sql.gz; do mv -v "$i" "${i/*-schema-/-00-schema-}"; done
+set -x ;
+
+for i in ${LOCAL_DEST}/*-data-${VERSION}.sql.gz; do mv "$i" "${i/*-data-/-01-data-}"; done
+for i in ${LOCAL_DEST}/*-schema-${VERSION}.sql.gz; do mv "$i" "${i/*-schema-/-00-schema-}"; done
+
+set +x ;
 
 chown -R 1001:1001 "${LOCAL_DEST}" ;
 
